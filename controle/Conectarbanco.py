@@ -5,7 +5,7 @@ class Banco:
    def __init__(self):
        self.servidor="localhost"
        self.usuario="root"
-       self.senha="01112001"
+       self.senha=""
        self.banco="db_proj"
        self.ponteiro =""
 
