@@ -42,7 +42,7 @@ class Banco:
    def descarte(self):
       self.con.rollback()
 
-   def configura(self,ho,db,se="01112001",us='root'):
+   def configura(self,ho,db,se="",us='root'):
        self.servidor = ho
        self.usuario = us
        self.senha = se
