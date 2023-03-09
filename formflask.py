@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request,redirect,url_for
 #Modelos
-from modelo.aluno import *
 from modelo.evento import *
 from modelo.evento_participante import *
 from modelo.palestrante import *
@@ -9,12 +8,12 @@ from modelo.presenca import *
 from modelo.semana import *
 
 #Controles
-from controle.controleAluno import *
 from controle.controleSemana import *
 from controle.controleParticipante import *
 from controle.controlePalestrante import *
 from controle.controleEvento import *
 from controle.controleEvento_participante import *
+from controle.controlePresenca import *
 
 import sys
 import subprocess as sp
@@ -29,17 +28,11 @@ def index():
     return render_template('homepage.html', result=dados)
 
 
-@app.route('/editar/<id>')
-def editar(id):
-    daoAluno = ControleAluno()
-    dados = daoAluno.pesquisaCodigo(id)
-    return render_template("editaestudante.html",dados = dados)
-
 @app.route('/delete/<id>')
 def delete(id):
     daoSemana = ControleSemana()
     daoSemana.deletarSemana(id)
-    return redirect(url_for('tabela'))
+    return redirect(url_for('index'))
 
 @app.route('/gravar',methods = ['POST', 'GET'])
 def gravar():
@@ -180,7 +173,10 @@ def inscricoes():
     daoSemana = ControleSemana()
     semanas = daoSemana.listarTodosRegistros()
 
-    return render_template('inscricoes.html', inscricoes = inscricoes,participantes = participantes,eventos = eventos,semanas=semanas)
+    daoPresenca= ControlePresenca()
+    presencas = daoPresenca.listarTodosRegistros()
+
+    return render_template('inscricoes.html', inscricoes = inscricoes,participantes = participantes,eventos = eventos,semanas=semanas,presencas=presencas)
 
 
 @app.route('/gravarInscricao',methods = ['POST', 'GET'])
@@ -201,11 +197,65 @@ def gravarInscricao():
 
     return redirect(url_for('inscricoes'))  
 
+@app.route('/editarInscricao/<idE>,<idP>')
+def editarInscricao(idE,idP):
+    daoEvento = ControleEvento()
+    evento = daoEvento.pesquisaCodigo(idE)
+
+    daoParticipante = ControleParticipante()
+    participante = daoParticipante.pesquisaCodigo(idP)
+    return render_template("editinscricoes.html",evento=evento,participante=participante)
+
 @app.route('/deleteInscricao/<idE>,<idP>')
 def deleteInscricao(idE,idP):
     daoInscricoes = ControleEvento_participante()
     daoInscricoes.deletarEvento_participante(idE,idP)
     return redirect(url_for('inscricoes'))
+
+#----------------------------------------------------------------------
+
+@app.route('/presencas')
+def presencas():
+
+    daoParticipantes = ControleParticipante()
+    participantes = daoParticipantes.listarTodosRegistros()
+
+    daoEvento = ControleEvento()
+    eventos = daoEvento.listarTodosRegistros()
+
+    daoPresenca= ControlePresenca()
+    presencas = daoPresenca.listarTodosRegistros()
+
+    daoInscricoes= ControleEvento_participante()
+    inscricoes = daoInscricoes.listarTodosRegistros()
+
+    return render_template('presencas.html', inscricoes = inscricoes,participantes = participantes,eventos = eventos,presencas=presencas)
+
+@app.route('/gravarPresenca',methods = ['POST', 'GET'])
+def gravarPresenca():
+    if request.method == 'POST':
+       result = request.form
+       if result['botao']=='Voltar':
+           return redirect(url_for('presencas'))
+       pre = Presenca()
+       pre.id_Evento = result['idEvento']
+       pre.id_Participante = result['idParticipante']   
+       pre.Presente= result['Presente']  
+       daoPresenca = ControlePresenca()
+
+       if result['botao']=='Gravar':
+           flag = daoPresenca.incluirPresenca(pre)
+           if flag == 1:
+            daoPresenca.alterarPresenca(pre)
+
+    return redirect(url_for('presencas'))
+
+@app.route('/deletePresenca/<idE>,<idP>')
+def deletePresenca(idE,idP):
+    daoPresencas = ControlePresenca()
+    daoPresencas.deletarPresenca(idE,idP)
+    return redirect(url_for('presencas'))
+
 
 
 if __name__ == '__main__':

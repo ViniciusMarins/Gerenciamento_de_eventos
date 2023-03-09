@@ -1,6 +1,5 @@
 from controle.Conectarbanco import *
-from modelo.aluno import *
-from modelo.semana import *
+
 import json
 import datetime
 
@@ -23,6 +22,7 @@ class ControleGenerico:
         except:
            print("Houve um erro")
            self.ob.descarte()
+           return 1
 
     def alterar(self,objeto):
         self.ob.abrirConexao();

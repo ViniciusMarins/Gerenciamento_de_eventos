@@ -3,13 +3,14 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Semanas</title>
+    <title>Eventos</title>
     <link rel="stylesheet" href="{{url_for('static',filename='css/base.css')}}" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@500&display=swap');
     </style>
@@ -40,6 +41,9 @@
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="inscricoes">Inscrições</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="presencas">Presenças</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -69,7 +73,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="Data" class="form-label">Data</label>
-                    <input type="text" name="data" class="form-control" id="Data" required="true">
+                    <input type="text" name="data" class="form-control" id="Data" required="true" placeholder="XX/XX/XXXX">
                 </div>
                 <div class="mb-3">
                     <label for="Horario" class="form-label">Horário</label>
@@ -93,10 +97,10 @@
         </div>
         <hr>
         </hr>
-        <div class="tabela">
+        <div class="table-responsive">
             <h2>Eventos Ativos</h2>
             <table class="table">
-                <thead class="thead-dark">
+                <thead class="table-dark">
                     <tr>
                         <th scope="col">Código</th>
                         <th scope="col">Nome</th>
@@ -105,8 +109,8 @@
                         <th scope="col">Horario</th>
                         <th scope="col">Semana</th>
                         <th scope="col">Palestrante</th>
-                        <th scope="col" colspan="3">
-                            <center>Comandos</center>
+                        <th scope="col" colspan="1">
+                            <center>Excluir</center>
                         </th>
                     </tr>
 
@@ -132,7 +136,6 @@
                         {% endif %}
                         {% endfor %}
                         
-                        <td> <a href='/editarEvento/{{x[0]}}'> <i class="bi-pencil"></i> </a></td>
                         <td><a href='/deleteEvento/{{x[0]}}'> <i class="bi-trash"></i> </a></td>
                     </tr>
                     {% endfor %}

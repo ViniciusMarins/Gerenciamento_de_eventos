@@ -42,12 +42,12 @@ footer {
     width: 60%;
     flex-direction: column;
 }
-.tabela{
+.table-responsive{
     margin-top: 20px;
     margin-bottom: 60px;
     text-align: center;
 }
-.tabela h2{
+.table-responsive h2{
     text-align: center;
     font-family: 'Fira Sans', sans-serif;
     font-size: 33px;
@@ -95,7 +95,7 @@ body h4{
     font-size: 19px!important;
     border-color: #0293ee!important;
     border-radius: 20px!important;
-    background-color: rgb(246, 245, 248)!important;
+    background-color: rgb(255, 255, 255)!important;
 }
 
 .nav-link:hover{
@@ -106,4 +106,9 @@ body h4{
 
 .nav-link{
     border-radius: 15px!important;
+}
+
+.selects{
+    margin-left: 3px;
+    margin-bottom: 4px;
 }
