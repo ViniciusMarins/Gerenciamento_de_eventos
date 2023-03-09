@@ -7,7 +7,7 @@ class ControleGenerico:
 
     def __init__(self):
         self.ob = Banco()
-        self.ob.configura(ho="localhost", db="db_proj", us="root",se="01112001")
+        self.ob.configura(ho="localhost", db="db_proj", us="root",se="")
 
     def incluir(self,objeto):
         self.ob.abrirConexao();
