@@ -1,0 +1,109 @@
+html {
+    height: 100%;
+    min-height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+footer {
+    margin-top: auto;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color:#0293ee!important;
+    font-family: 'Fira Sans', sans-serif!important;
+    font-size: 20px!important;
+}
+#nav{
+    background-color: #363636;
+}
+
+.navbar-brand{
+    font-size: 35px!important;
+    color:#0293ee!important;
+    font-family: 'Fira Sans', sans-serif!important;
+}
+.cont{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+.container{
+    font-family: 'Fira Code', sans-serif;
+}
+
+.formulario{
+    margin-top: 10px;
+    display: flex;
+    width: 60%;
+    flex-direction: column;
+}
+.tabela{
+    margin-top: 20px;
+    margin-bottom: 60px;
+    text-align: center;
+}
+.tabela h2{
+    text-align: center;
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 33px;
+}
+body hr{
+    border-style:solid;
+    border-width: 1px;
+    border-radius: 100%;
+    color: #363636;
+}
+footer p{
+    margin-bottom: 0;
+    padding: 30px;
+    text-align: center;
+    color: white;
+    font-size: 17px;
+    background-color: #363636;
+}
+
+
+.bg-dark {
+    background-color: #363636!important;
+}
+
+body input,textarea{
+    border-radius: 20px!important;
+    border-color: #0293ee!important;
+}
+
+body label{
+    font-size: 19px;
+}
+
+body h4{
+    font-family: 'Fira Code', sans-serif;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.btn-primary {
+    border-radius: 20px!important;
+}
+
+.form-select-lg{
+    font-size: 19px!important;
+    border-color: #0293ee!important;
+    border-radius: 20px!important;
+    background-color: rgb(246, 245, 248)!important;
+}
+
+.nav-link:hover{
+    background-color: #4d4d4d!important;
+    transition: 0.5s;
+    opacity: 1;
+}
+
+.nav-link{
+    border-radius: 15px!important;
+}

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Inscrições</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/base.css')}}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@500&display=swap');
+    </style>
+</head>
+
+<body>
+    <nav id="nav" class="navbar navbar-expand-md navbar-dark mb-4">
+        <div class="container-fluid">
+            <a class="navbar-brand">IFSP</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/">Semanas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="eventos">Eventos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="participantes">Participantes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="palestrantes">Palestrantes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="inscricoes">Inscrições</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <div class="bg-light p-5 rounded">
+            <h1>Faça uma inscrição!</h1>
+            <p class="lead">Faça a inscrição de alunos participantes em Eventos que estão ocorrendo.</p>
+        </div>
+        </main>
+        <hr>
+        </hr>
+        <div class="cont">
+
+            <form class="formulario" action="http://localhost:5000/gravarInscricao" method="POST">
+                <h4>Formulário de Cadastro</h4>
+
+                <select name="idEvento" class="form-select form-select-lg mb-3" required="true" aria-label=".form-select-lg example">
+                    <option selected >Selecione um Evento</option>
+                    {% for x in eventos%}
+                    <option value="{{x[0]}}">{{x[1]}}</option>
+                    {% endfor %}
+                </select>
+                <select name="idParticipante" class="form-select form-select-lg mb-3" required="true" aria-label=".form-select-lg example">
+                    <option selected>Selecione um Participante</option>
+                    {% for x in participantes%}
+                    <option value="{{x[0]}}">{{x[1]}}</option>
+                    {% endfor %}
+                </select>
+
+                <button class="btn btn-primary" type="submit" value="Gravar" name='botao'>Cadastrar</button>
+            </form>
+        </div>
+        <hr>
+        </hr>
+        <div class="tabela">
+            <h2>Inscrições</h2>
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Evento</th>
+                        <th scope="col">Semana</th>
+                        <th scope="col">Participante</th>
+                        <th scope="col" colspan="3">
+                            <center>Comandos</center>
+                        </th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+                    {% for x in inscricoes%}
+                    <tr>
+                        {% for i in eventos%}
+                        {% if i[0] == x[0]%}    
+                        <td> {{i[1]}} </td>
+                        {% endif %}
+                        {% endfor %}
+                        
+                        {% for j in semanas%}
+                        {% if j[0] == x[1]%}    
+                        <td> {{ j[1]}} </td>
+                        {% endif %}
+                        {% endfor %}
+
+                        {% for k in participantes%}
+                        {% if k[0] == x[2]%}    
+                        <td> {{ k[1]}} </td>
+                        {% endif %}
+                        {% endfor %}
+                        
+                        
+                        <!-------
+                        <td> {{ x[3]}} </td>
+                        <td> {{ x[4]}} </td>
+                        {% for i in semanas%}
+                        {% if i[0] == x[5]%}    
+                        <td> {{i[1]}} </td>
+                        {% endif %}
+                        {% endfor %}
+
+                        {% for j in palestrantes%}
+                        {% if j[0] == x[6]%}    
+                        <td> {{j[1]}} </td>
+                        {% endif %}
+                        {% endfor %}
+                        ---->
+                        <td> <a href='/editarEvento/{{x[0]}}'> <i class="bi-pencil"></i> </a></td>
+                        <td><a href='/deleteInscricao/{{x[0]}},{{x[2]}}'> <i class="bi-trash"></i> </a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer>
+        <p>Desenvolvido por Vinícius Assunção Marins.</p>
+    </footer>
+</body>
+
+</html>
